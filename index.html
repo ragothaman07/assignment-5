@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('todolistbg.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1#todoListHeading:hover {
+            color: rgb(79, 23, 23);
+            transition: color 0.5s ease;
+        }
+        .hi:hover{
+            background-color: rgb(79, 23, 23);
+            transition: color 0.5s ease;
+            color: aliceblue;
+        }
+        .hi{
+            color: azure;
+            background-color: rgb(0, 0, 0);
+            transition: color 0.5s ease;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col justify-center items-center">
+    <h1 id="todoListHeading" class="text-5xl text-white font-bold mb-8">To-Do List</h1>
+    <div class="max-w-md w-full bg-white bg-opacity- shadow-md rounded-xl p-6">
+        <div class="flex items-center mb-4">
+            <input type="text" id="taskInput" class="w-full px-3 py-2 border rounded-md mr-4" placeholder="Add a new task">
+            <button onclick="addTask()" class="hi px-4 py-2 text-white rounded-md">Add</button>
+        </div>
+        <ul id="taskList">
+            <!-- Tasks will be added dynamically here -->
+        </ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskList = document.getElementById('taskList');
+
+            if (taskInput.value.trim() !== '') {
+                const taskItem = document.createElement('li');
+                taskItem.classList.add('flex', 'items-center', 'py-2', 'border-b');
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.classList.add('mr-2');
+                taskItem.appendChild(checkbox);
+
+                const taskText = document.createElement('span');
+                taskText.textContent = taskInput.value;
+                taskText.classList.add('text-lg');
+                taskItem.appendChild(taskText);
+
+                taskList.appendChild(taskItem);
+
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task.');
+            }
+        }
+    </script>
+</body>
+</html>
